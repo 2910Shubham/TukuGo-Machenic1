@@ -13,15 +13,11 @@ class _QrScreenState extends State<QrScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(175, 175, 175, 0.1),
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
         elevation: 0,
-        title: const Text(
+        title: Text(
           'QR Code',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 25,
-            fontWeight: FontWeight.w600,
-          ),
+          style: Theme.of(context).textTheme.titleLarge,
         ),
         centerTitle: true,
         actions: [
@@ -29,13 +25,13 @@ class _QrScreenState extends State<QrScreen> {
             onPressed: () {},
             icon: const Icon(
               Icons.help_outline,
-              color: Color.fromRGBO(0, 0, 0, 0.5),
+              color: Color.fromRGBO(255, 255, 255, 0.5),
               size: 25,
             ),
             label: const Text(
               'Help',
               style: TextStyle(
-                color: Colors.grey,
+                color: Color.fromRGBO(255, 255, 255, 0.6),
                 fontSize: 22,
               ),
             ),
@@ -100,7 +96,7 @@ class _QrScreenState extends State<QrScreen> {
                     },
                     style: ElevatedButton.styleFrom(
                       fixedSize: Size(342, 10),
-                      backgroundColor: Color.fromRGBO(217, 217, 217, 0.4),
+                      backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                       foregroundColor: Colors.black,
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       shape: RoundedRectangleBorder(
@@ -112,7 +108,7 @@ class _QrScreenState extends State<QrScreen> {
                       'Cancel',
                       style: TextStyle(
                         fontSize: 24,
-                        color: Color.fromRGBO(0, 0, 0, 0.6),
+                        color: Color.fromRGBO(255, 255, 255, 0.9),
                         fontWeight: FontWeight.w600,
                       ),
                     ),

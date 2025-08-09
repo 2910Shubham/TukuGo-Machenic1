@@ -9,7 +9,7 @@ class PaymentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Color.fromRGBO(175, 175, 175, 0.1),
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
         elevation: 0,
         title: Text(
           'Payment',
@@ -21,13 +21,13 @@ class PaymentScreen extends StatelessWidget {
             onPressed: () {},
             icon: const Icon(
               Icons.help_outline,
-              color: Color.fromRGBO(0, 0, 0, 0.5),
+              color: Color.fromRGBO(255, 255, 255, 0.5),
               size: 25,
             ),
             label: const Text(
               'Help',
               style: TextStyle(
-                color: Colors.grey,
+                color: Color.fromRGBO(255, 255, 255, 0.6),
                 fontSize: 22,
               ),
             ),
@@ -132,7 +132,8 @@ class PaymentScreen extends StatelessWidget {
                               );
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2196F3),
+                              backgroundColor:
+                                  const Color.fromRGBO(93, 32, 172, 1),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 8),
                               shape: RoundedRectangleBorder(
@@ -157,7 +158,8 @@ class PaymentScreen extends StatelessWidget {
                               _showCollectCashBottomSheet(context);
                             },
                             style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFF2196F3),
+                              backgroundColor:
+                                  const Color.fromRGBO(93, 32, 172, 1),
                               foregroundColor: Colors.white,
                               padding: const EdgeInsets.symmetric(vertical: 8),
                               shape: RoundedRectangleBorder(
@@ -302,7 +304,7 @@ void _showCollectCashBottomSheet(BuildContext context) {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      backgroundColor: Color.fromRGBO(10, 132, 255, 1),
+                      backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                       foregroundColor: Colors.white,
                     ),
                     child: const Text(
@@ -331,7 +333,7 @@ void _showCollectCashBottomSheet(BuildContext context) {
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      backgroundColor: Color.fromRGBO(20, 145, 20, 1),
+                      backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                       foregroundColor: Colors.white,
                     ),
                     child: const Text(
