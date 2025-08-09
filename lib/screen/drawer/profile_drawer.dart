@@ -7,6 +7,7 @@ import 'package:tukugo/screen/drawer/contactUs.dart';
 import 'package:tukugo/screen/drawer/globals.dart';
 import 'package:tukugo/screen/drawer/wallet.dart';
 import 'package:tukugo/screen/drawer/change-password.dart';
+import 'package:tukugo/auth/verification_screen01.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({Key? key}) : super(key: key);
@@ -96,7 +97,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                   onTap: () {
                     Navigator.of(context, rootNavigator: true).push(
                       MaterialPageRoute(
-                          builder: (context) => VehicleSelectionPage()),
+                          builder: (context) => VerificationScreen01()),
                     );
                   },
                 ),
