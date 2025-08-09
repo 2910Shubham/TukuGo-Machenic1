@@ -16,11 +16,7 @@ class _TransactionScreenState extends State<TransactionScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        leading: InkWell(
-            onTap: () {
-              context.go('/wallet');
-            },
-            child: Icon(Icons.arrow_back)),
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
         actions: [
           IconButton(
             padding: EdgeInsets.symmetric(horizontal: 16),
@@ -31,83 +27,89 @@ class _TransactionScreenState extends State<TransactionScreen> {
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const Center(
-              child: Padding(
-                padding: EdgeInsets.only(top: 8, bottom: 16),
-                child: Text(
-                  'Transactions',
-                  style: TextStyle(fontSize: 24, fontWeight: FontWeight.w600),
-                ),
-              ),
-            ),
-            Expanded(
-              child: ListView.builder(
-                itemCount: 8,
-                itemBuilder: (context, index) {
-                  bool isDebit = index % 2 == 0;
-                  return Padding(
-                    padding: const EdgeInsets.only(bottom: 12),
-                    child: Container(
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        border: Border.all(color: Colors.tealAccent),
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.white,
-                      ),
-                      child: Row(
-                        children: [
-                          CircleAvatar(
-                            radius: 18,
-                            backgroundColor: isDebit
-                                ? Colors.red.shade100
-                                : Colors.green.shade100,
-                            child: Icon(
-                              isDebit ? Icons.remove : Icons.check,
-                              color: isDebit ? Colors.red : Colors.green,
-                              size: 18,
-                            ),
-                          ),
-                          const SizedBox(width: 12),
-                          Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                isDebit ? 'Sanjana' : 'Priyam',
-                                style: const TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                ),
-                              ),
-                              const Text(
-                                'Today at 09:20 am',
-                                style: TextStyle(
-                                  fontSize: 12,
-                                  color: Colors.grey,
-                                ),
-                              ),
-                            ],
-                          ),
-                          const Spacer(),
-                          Text(
-                            isDebit ? '-₹570.00' : '₹570.00',
-                            style: TextStyle(
-                              color: isDebit ? Colors.red : Colors.green,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ],
-                      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Color.fromRGBO(93, 32, 172, 1)),
+            child: Text('Transactions',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                )),
+          ),
+          SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              itemCount: 8,
+              itemBuilder: (context, index) {
+                bool isDebit = index % 2 == 0;
+                return Padding(
+                  padding: const EdgeInsets.only(bottom: 12),
+                  child: Container(
+                    padding: const EdgeInsets.all(12),
+                    decoration: BoxDecoration(
+                      border: Border.all(color: Colors.tealAccent),
+                      borderRadius: BorderRadius.circular(12),
+                      color: Colors.white,
                     ),
-                  );
-                },
-              ),
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          radius: 18,
+                          backgroundColor: isDebit
+                              ? Colors.red.shade100
+                              : Colors.green.shade100,
+                          child: Icon(
+                            isDebit ? Icons.remove : Icons.check,
+                            color: isDebit ? Colors.red : Colors.green,
+                            size: 18,
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text(
+                              isDebit ? 'Sanjana' : 'Priyam',
+                              style: const TextStyle(
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const Text(
+                              'Today at 09:20 am',
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: Colors.grey,
+                              ),
+                            ),
+                          ],
+                        ),
+                        const Spacer(),
+                        Text(
+                          isDebit ? '-₹570.00' : '₹570.00',
+                          style: TextStyle(
+                            color: isDebit ? Colors.red : Colors.green,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
-          ],
-        ),
+          ),
+        ],
       ),
       // bottomNavigationBar: CustomBottomNavBar(
       //   selectedIndex: selectedIndex,

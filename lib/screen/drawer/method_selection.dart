@@ -149,7 +149,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                     // Add your save logic here
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
+                    backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
@@ -157,7 +157,9 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
                   ),
                   child: const Text(
                     'Save Payment Method',
-                    style: TextStyle(color: Colors.white, fontSize: 16),
+                    style: TextStyle(
+                        color: Color.fromRGBO(255, 255, 255, 0.7),
+                        fontSize: 16),
                   ),
                 ),
               ),
@@ -262,7 +264,7 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
             }
           },
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: Color.fromRGBO(93, 32, 172, 1),
             padding: const EdgeInsets.symmetric(vertical: 16),
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(8),
@@ -270,7 +272,8 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
           ),
           child: const Text(
             'Confirm',
-            style: TextStyle(color: Colors.white, fontSize: 16),
+            style: TextStyle(
+                color: Color.fromRGBO(255, 255, 255, 0.7), fontSize: 16),
           ),
         ),
       ),

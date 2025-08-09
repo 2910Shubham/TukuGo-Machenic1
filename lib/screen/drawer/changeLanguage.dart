@@ -219,7 +219,8 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
                   Navigator.pop(context, selectedLanguageIndex);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF007AFF), // iOS blue color
+                  backgroundColor:
+                      Color.fromRGBO(93, 32, 172, 1), // iOS blue color
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
@@ -230,7 +231,7 @@ class _ChangeLanguagePageState extends State<ChangeLanguagePage> {
                   style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
-                    color: Colors.white,
+                    color: Color.fromRGBO(255, 255, 255, 0.7),
                   ),
                 ),
               ),

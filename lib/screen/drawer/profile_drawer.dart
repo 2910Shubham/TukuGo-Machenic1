@@ -109,7 +109,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     );
                   },
                 ),
-                _buildMenuItem(Icons.build_outlined, 'Mechanic'),
                 _buildMenuItem(
                   Icons.lock_outline,
                   'Change password',

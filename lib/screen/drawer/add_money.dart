@@ -45,10 +45,6 @@ class _AddMoneyPageState extends State<AddMoneyPage> {
         centerTitle: true,
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => context.go('/wallet'),
-        ),
         title: const Text(
           'Amount',
           style: TextStyle(
@@ -256,8 +252,8 @@ class _AddMoneyPageState extends State<AddMoneyPage> {
               child: ElevatedButton(
                 onPressed: _handleConfirm,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
-                  foregroundColor: Colors.white,
+                  backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+                  foregroundColor: Color.fromRGBO(255, 255, 255, 0.7),
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
@@ -376,11 +372,7 @@ class _AddMoneyPageState extends State<AddMoneyPage> {
                   width: 80,
                   height: 80,
                   decoration: BoxDecoration(
-                    gradient: LinearGradient(
-                      colors: [Colors.blue[400]!, Colors.blue[600]!],
-                      begin: Alignment.topLeft,
-                      end: Alignment.bottomRight,
-                    ),
+                    color: Color.fromRGBO(93, 32, 172, 1),
                     shape: BoxShape.circle,
                   ),
                   child: Stack(
@@ -463,8 +455,8 @@ class _AddMoneyPageState extends State<AddMoneyPage> {
                       context.go('/home'); // Go back to previous screen
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.blue,
-                      foregroundColor: Colors.white,
+                      backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+                      foregroundColor: Color.fromRGBO(255, 255, 255, 0.7),
                       padding: const EdgeInsets.symmetric(vertical: 16),
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(8),

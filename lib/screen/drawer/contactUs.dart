@@ -229,7 +229,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: const Color(0xFF007AFF),
+                    backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -240,7 +240,7 @@ class _ContactUsScreenState extends State<ContactUsScreen> {
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w500,
-                      color: Colors.white,
+                      color: Color.fromRGBO(255, 255, 255, 0.7),
                     ),
                   ),
                 ),

@@ -41,7 +41,7 @@ class PaymentSuccessScreen extends StatelessWidget {
             },
             child: Icon(
               Icons.arrow_back_ios,
-              color: Color(0xFF007AFF),
+              color: Color.fromRGBO(255, 255, 255, 0.9),
               size: 20,
             ),
           ),
@@ -60,7 +60,7 @@ class PaymentSuccessScreen extends StatelessWidget {
             padding: EdgeInsets.only(right: 16),
             child: Icon(
               Icons.download,
-              color: Color.fromRGBO(29, 27, 32, 0.6),
+              color: Color.fromRGBO(93, 32, 172, 1),
               size: 24,
             ),
           ),
@@ -318,7 +318,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
               ratingText,
               style: const TextStyle(
                 fontSize: 18,
-                color: Colors.blue,
+                color: Color.fromRGBO(93, 32, 172, 1),
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -368,7 +368,7 @@ class _RatingBottomSheetState extends State<RatingBottomSheet> {
                   context.go('/payment');
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: Color.fromRGBO(93, 32, 172, 1),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(8),
                   ),
