@@ -61,7 +61,7 @@ class VerificationScreen01 extends StatelessWidget {
               width: double.infinity,
               padding: EdgeInsets.all(20),
               decoration: BoxDecoration(
-                color: Color(0xFF64B5F6),
+                color: Color(0xFF5D20AC),
                 borderRadius: BorderRadius.only(
                     // bottomLeft: Radius.circular(16),
                     // bottomRight: Radius.circular(16),
@@ -116,18 +116,18 @@ class VerificationScreen01 extends StatelessWidget {
                 padding: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-                    VerificationCard(
-                      title: 'Drivers License',
-                      subtitle: 'Under verification',
-                      icon: Icons.warning_rounded,
-                      iconColor: Colors.orange,
-                      onTap: () {
-                        Navigator.of(context, rootNavigator: true).push(
-                          MaterialPageRoute(
-                              builder: (context) => LicenseUploadPage()),
-                        );
-                      },
-                    ),
+                    // VerificationCard(
+                    //   title: 'Drivers License',
+                    //   subtitle: 'Under verification',
+                    //   icon: Icons.warning_rounded,
+                    //   iconColor: Colors.orange,
+                    //   onTap: () {
+                    //     Navigator.of(context, rootNavigator: true).push(
+                    //       MaterialPageRoute(
+                    //           builder: (context) => LicenseUploadPage()),
+                    //     );
+                    //   },
+                    // ),
                     SizedBox(height: 12),
                     VerificationCard(
                       title: 'Profile Info',

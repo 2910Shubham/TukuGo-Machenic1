@@ -186,7 +186,7 @@ class _SetPasswordScreenState extends State<SetPasswordScreen> {
                       }
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: const Color(0xFF1976D2), // Darker blue color
+                      backgroundColor: const Color(0xFF5D20AC), // Darker blue color
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(12),
                       ),

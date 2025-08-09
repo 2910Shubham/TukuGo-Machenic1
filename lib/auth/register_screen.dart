@@ -195,7 +195,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                                 });
                               },
                               visualDensity: VisualDensity.compact,
-                              activeColor: AppStyles.greenBorder,
+                              activeColor: AppStyles.secondaryColor,
                             ),
                             const Text('I understand terms & policy'),
                           ],
@@ -323,7 +323,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
         Container(
           height: 56,
           decoration: BoxDecoration(
-            border: Border.all(color: AppStyles.greenBorder),
+            border: Border.all(color: AppStyles.secondaryColor),
             borderRadius: BorderRadius.circular(15),
           ),
         ),
@@ -336,7 +336,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
             child: Text(
               label,
               style: const TextStyle(
-                color: Color(0xFFFFB74D),
+                color: Color(0xFF5D20AC),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),

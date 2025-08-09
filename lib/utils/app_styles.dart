@@ -6,8 +6,9 @@ class AppStyles {  // Colors
   static const Color blueGradientStart = Color(0xFF2196F3);
   static const Color blueGradientEnd = Color(0xFF0D47A1);
   static const Color greenBorder = Color(0xFF7CB342);
-  static const Color primaryColor = Color(0xFF2196F3); // Adding primary color
-  
+  static const Color primaryColor = Color(0xFF2196F3); 
+  static const Color secondaryColor = Color(0xFF5D20AC); // Adding primary color
+
   // Text Styles
   static TextStyle headingStyle = const TextStyle(
     fontSize: 32,
@@ -21,7 +22,7 @@ class AppStyles {  // Colors
   );
   
   static const TextStyle labelStyle = TextStyle(
-    color: orange,
+    color: Color(0xFF5D20AC),
     fontWeight: FontWeight.w600,
     fontSize: 14,
   );
@@ -46,7 +47,7 @@ class AppStyles {  // Colors
 
   static BoxDecoration gradientButtonDecoration = BoxDecoration(
     gradient: const LinearGradient(
-      colors: [blueGradientStart, blueGradientEnd],
+      colors:[  Color(0xFF5D20AC), Color(0xFF5D20AC)],
     ),
     borderRadius: BorderRadius.circular(10),
   );

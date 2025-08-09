@@ -138,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                   _rememberMe = value;
                                 });
                               },
-                              activeColor: AppStyles.greenBorder,
+                              activeColor: AppStyles.secondaryColor,
                             ),
                             const Text("Remember me"),
                             const Spacer(),
@@ -148,7 +148,7 @@ class _LoginScreenState extends State<LoginScreen> {
                               child: const Text(
                                 "Forgot Password?",
                                 style: TextStyle(
-                                  color: AppStyles.greenBorder,
+                                  color: AppStyles.secondaryColor,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -281,7 +281,7 @@ class _LoginScreenState extends State<LoginScreen> {
         Container(
           height: 56,
           decoration: BoxDecoration(
-            border: Border.all(color: AppStyles.greenBorder),
+            border: Border.all(color: AppStyles.secondaryColor),
             borderRadius: BorderRadius.circular(15),
           ),
         ),
@@ -294,7 +294,7 @@ class _LoginScreenState extends State<LoginScreen> {
             child: Text(
               label,
               style: const TextStyle(
-                color: Color(0xFFFFB74D),
+                color: Color(0xFF5D20AC),
                 fontSize: 14,
                 fontWeight: FontWeight.w500,
               ),
