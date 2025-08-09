@@ -68,72 +68,87 @@ class _ChangePasswordScreenState extends State<ChangePasswordScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(),
-      body: Padding(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
-            const Text(
-              'Change Password',
-              style: TextStyle(
-                fontSize: 24,
-                color: Colors.black,
-                fontWeight: FontWeight.w500,
-              ),
-            ),
-            SizedBox(height: 16),
-            // old password
-            _buildPasswordField(
-              controller: _oldPasswordController,
-              hint: 'Old Password',
-              obscureText: _obscureOld,
-              onToggle: () => setState(() => _obscureOld = !_obscureOld),
-            ),
-            const SizedBox(height: 16),
-            _buildPasswordField(
-              controller: _newPasswordController,
-              hint: 'New Password',
-              obscureText: _obscureNew,
-              onToggle: () => setState(() => _obscureNew = !_obscureNew),
-            ),
-            const SizedBox(height: 16),
-            _buildPasswordField(
-              controller: _confirmPasswordController,
-              hint: 'Confirm Password',
-              obscureText: _obscureConfirm,
-              onToggle: () =>
-                  setState(() => _obscureConfirm = !_obscureConfirm),
-            ),
-            const SizedBox(height: 30),
-            SizedBox(
-              width: double.infinity,
-              height: 50,
-              child: ElevatedButton(
-                onPressed: () {
-// change password logic
-                  print("Old: ${_oldPasswordController.text}");
-                  print("New: ${_newPasswordController.text}");
-                  print("Confirm: ${_confirmPasswordController.text}");
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: const Color(0xFF007AFF), // iOS blue
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
-                  ),
-                  elevation: 0,
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+      ),
+      body: Column(
+        children: [
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Color.fromRGBO(93, 32, 172, 1)),
+            child: Text('Change Password',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                )),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
+                SizedBox(height: 16),
+                // old password
+                _buildPasswordField(
+                  controller: _oldPasswordController,
+                  hint: 'Old Password',
+                  obscureText: _obscureOld,
+                  onToggle: () => setState(() => _obscureOld = !_obscureOld),
                 ),
-                child: const Text(
-                  'Save',
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
+                const SizedBox(height: 16),
+                _buildPasswordField(
+                  controller: _newPasswordController,
+                  hint: 'New Password',
+                  obscureText: _obscureNew,
+                  onToggle: () => setState(() => _obscureNew = !_obscureNew),
+                ),
+                const SizedBox(height: 16),
+                _buildPasswordField(
+                  controller: _confirmPasswordController,
+                  hint: 'Confirm Password',
+                  obscureText: _obscureConfirm,
+                  onToggle: () =>
+                      setState(() => _obscureConfirm = !_obscureConfirm),
+                ),
+                const SizedBox(height: 30),
+                SizedBox(
+                  width: double.infinity,
+                  height: 50,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      // change password logic
+                      print("Old: ${_oldPasswordController.text}");
+                      print("New: ${_newPasswordController.text}");
+                      print("Confirm: ${_confirmPasswordController.text}");
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+                      // iOS blue
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8),
+                      ),
+                      elevation: 0,
+                    ),
+                    child: const Text(
+                      'Save',
+                      style: TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                        color: Color.fromRGBO(255, 255, 255, 0.7),
+                      ),
+                    ),
                   ),
                 ),
-              ),
+              ],
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
