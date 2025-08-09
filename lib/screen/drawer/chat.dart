@@ -108,9 +108,28 @@ class _ChatScreenState extends State<ChatScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFF9F9F9),
-      appBar: ChatAppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+      ),
       body: Column(
         children: [
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Color.fromRGBO(93, 32, 172, 1)),
+            child: Text('Chat',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                )),
+          ),
+          SizedBox(height: 30),
           Expanded(
             child: ListView.builder(
               controller: _scrollController,
@@ -170,14 +189,13 @@ class MessageBubble extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 4),
       child: Column(
-        crossAxisAlignment: message.isUser 
-          ? CrossAxisAlignment.end 
-          : CrossAxisAlignment.start,
+        crossAxisAlignment:
+            message.isUser ? CrossAxisAlignment.end : CrossAxisAlignment.start,
         children: [
           Row(
-            mainAxisAlignment: message.isUser 
-              ? MainAxisAlignment.end 
-              : MainAxisAlignment.start,
+            mainAxisAlignment: message.isUser
+                ? MainAxisAlignment.end
+                : MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.end,
             children: [
               if (!message.isUser) ...[
@@ -196,23 +214,24 @@ class MessageBubble extends StatelessWidget {
                   constraints: BoxConstraints(
                     maxWidth: MediaQuery.of(context).size.width * 0.75,
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
                   decoration: BoxDecoration(
-                    color: message.isUser 
-                      ? const Color(0xFFD1FADF) 
-                      : const Color(0xFFE5E5EA),
-                    border: message.isUser 
-                      ? Border.all(color: const Color(0xFF12B76A), width: 1)
-                      : null,
+                    color: message.isUser
+                        ? const Color(0xFFD1FADF)
+                        : const Color(0xFFE5E5EA),
+                    border: message.isUser
+                        ? Border.all(color: const Color(0xFF12B76A), width: 1)
+                        : null,
                     borderRadius: BorderRadius.circular(16),
                   ),
                   child: Text(
                     message.message,
                     style: TextStyle(
                       fontSize: 14,
-                      color: message.isUser 
-                        ? const Color(0xFF065F46) 
-                        : const Color(0xFF1F2937),
+                      color: message.isUser
+                          ? const Color(0xFF065F46)
+                          : const Color(0xFF1F2937),
                       fontWeight: FontWeight.w400,
                     ),
                   ),
@@ -280,7 +299,8 @@ class ChatInputField extends StatelessWidget {
             const SizedBox(width: 12),
             Expanded(
               child: Container(
-                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                 decoration: BoxDecoration(
                   color: const Color(0xFFF9FAFB),
                   borderRadius: BorderRadius.circular(20),

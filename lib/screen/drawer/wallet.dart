@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:latlong2/latlong.dart';
+import 'package:tukugo/screen/drawer/add_money.dart';
+import 'package:tukugo/screen/drawer/transaction.dart';
 
 class MyWallet extends StatelessWidget {
   @override
@@ -47,7 +50,11 @@ class MyWallet extends StatelessWidget {
                         ),
                         Spacer(),
                         GestureDetector(
-                          onTap: () => context.go('/auth/drawer/addmoney'),
+                          onTap: () =>
+                              Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                                builder: (context) => AddMoneyPage()),
+                          ),
                           child: Container(
                             width: 168,
                             padding: EdgeInsets.symmetric(
@@ -55,7 +62,8 @@ class MyWallet extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(10),
                               border: Border.all(
-                                color: Colors.blue, // Blue color border
+                                color: Color.fromRGBO(
+                                    253, 184, 36, 1), // Blue color border
                                 width: 2, // 2 pixels wide
                               ),
                             ),
@@ -63,8 +71,8 @@ class MyWallet extends StatelessWidget {
                               child: Text(
                                 'Add Money',
                                 style: TextStyle(
-                                  color: Colors.black,
-                                  fontSize: 14,
+                                  color: Color.fromRGBO(253, 184, 36, 1),
+                                  fontSize: 16,
                                   fontWeight: FontWeight.w500,
                                 ),
                               ),
@@ -83,10 +91,10 @@ class MyWallet extends StatelessWidget {
                             height: 145,
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(228, 242, 255, 1),
+                              color: Color.fromRGBO(93, 32, 172, 0.5),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: Colors.blue, // Blue color border
+                                color: Color.fromRGBO(93, 32, 172, 1),
                                 width: 1, // 2 pixels wide
                               ),
                             ),
@@ -99,7 +107,7 @@ class MyWallet extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 SizedBox(height: 8),
@@ -107,7 +115,7 @@ class MyWallet extends StatelessWidget {
                                   'Available Balance',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -120,10 +128,10 @@ class MyWallet extends StatelessWidget {
                             height: 145,
                             padding: EdgeInsets.all(20),
                             decoration: BoxDecoration(
-                              color: Color.fromRGBO(228, 242, 255, 1),
+                              color: Color.fromRGBO(93, 32, 172, 0.5),
                               borderRadius: BorderRadius.circular(16),
                               border: Border.all(
-                                color: Colors.blue, // Blue color border
+                                color: Color.fromRGBO(93, 32, 172, 1),
                                 width: 1, // 2 pixels wide
                               ),
                             ),
@@ -136,7 +144,7 @@ class MyWallet extends StatelessWidget {
                                   style: TextStyle(
                                     fontSize: 28,
                                     fontWeight: FontWeight.bold,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                                 SizedBox(height: 8),
@@ -144,7 +152,7 @@ class MyWallet extends StatelessWidget {
                                   'Total Expense',
                                   style: TextStyle(
                                     fontSize: 14,
-                                    color: Colors.black,
+                                    color: Colors.white,
                                   ),
                                 ),
                               ],
@@ -168,8 +176,10 @@ class MyWallet extends StatelessWidget {
                           ),
                         ),
                         GestureDetector(
-                          onTap: () => context.go(
-                            '/auth/drawer/transactions',
+                          onTap: () =>
+                              Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                                builder: (context) => TransactionScreen()),
                           ),
                           child: Text(
                             'See All',

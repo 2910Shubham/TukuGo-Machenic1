@@ -6,17 +6,28 @@ class AboutUs extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
+      ),
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          SizedBox(height: 20),
-          Text('About Us',
-              style: TextStyle(
-                fontSize: 24,
-                fontWeight: FontWeight.w500,
-                color: Color.fromRGBO(0, 0, 0, 0.7),
-              )),
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Color.fromRGBO(93, 32, 172, 1)),
+            child: Text('About Us',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                )),
+          ),
           SizedBox(height: 30),
           SingleChildScrollView(
             padding: EdgeInsets.symmetric(horizontal: 16),
