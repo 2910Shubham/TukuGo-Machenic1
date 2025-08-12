@@ -120,63 +120,108 @@ class Notifications extends StatelessWidget {
     }
 
     return Scaffold(
-      backgroundColor: const Color(0xFFF8F9FA),
+      backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: const Color.fromRGBO(93, 32, 172, 1),
         elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'Notifications',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        toolbarHeight: 0, // Hide default app bar
       ),
-      body: displayItems.isEmpty
-          ? const Center(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(
-                    Icons.notifications_none,
-                    size: 64,
-                    color: Colors.grey,
+      body: Column(
+        children: [
+          // Custom top bar container
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 120,
+            decoration: const BoxDecoration(
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(30),
+                bottomRight: Radius.circular(30),
+              ),
+              color: Color.fromRGBO(93, 32, 172, 1),
+            ),
+            child: Stack(
+              children: [
+                // Back button
+                Positioned(
+                  left: 16,
+                  top: 0,
+                  bottom: 0,
+                  child: IconButton(
+                    icon: const Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                      size: 24,
+                    ),
+                    onPressed: () => Navigator.pop(context),
                   ),
-                  SizedBox(height: 16),
-                  Text(
-                    'No notifications',
+                ),
+                // Centered title
+                const Center(
+                  child: Text(
+                    'Notification',
                     style: TextStyle(
-                      fontSize: 18,
-                      color: Colors.grey,
+                      fontSize: 24,
                       fontWeight: FontWeight.w500,
+                      color: Color.fromRGBO(255, 255, 255, 0.7),
                     ),
                   ),
-                ],
-              ),
-            )
-          : ListView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: displayItems.length,
-              itemBuilder: (context, index) {
-                final item = displayItems[index];
-
-                // If item is a String, it's a section header
-                if (item is String) {
-                  return SectionTitle(title: item);
-                }
-
-                // Otherwise, it's a notification
-                final notification = item as NotificationItem;
-                return NotificationCard(
-                  title: notification.title,
-                  subtitle: notification.subtitle,
-                  time: notification.time,
-                  highlight: notification.highlight,
-                  onTap: () {
-                    // Handle notification tap
-                    print('Tapped on: ${notification.title}');
-                  },
-                );
-              },
+                ),
+              ],
             ),
+          ),
+          // Body content
+          Expanded(
+            child: displayItems.isEmpty
+                ? const Center(
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(
+                          Icons.notifications_none,
+                          size: 64,
+                          color: Colors.grey,
+                        ),
+                        SizedBox(height: 16),
+                        Text(
+                          'No notifications',
+                          style: TextStyle(
+                            fontSize: 18,
+                            color: Colors.grey,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  )
+                : ListView.builder(
+                    padding: const EdgeInsets.all(20),
+                    itemCount: displayItems.length,
+                    itemBuilder: (context, index) {
+                      final item = displayItems[index];
+
+                      // If item is a String, it's a section header
+                      if (item is String) {
+                        return SectionTitle(title: item);
+                      }
+
+                      // Otherwise, it's a notification
+                      final notification = item as NotificationItem;
+                      return NotificationCard(
+                        title: notification.title,
+                        subtitle: notification.subtitle,
+                        time: notification.time,
+                        highlight: notification.highlight,
+                        onTap: () {
+                          // Handle notification tap
+                            print('Tapped on: ${notification.title}');
+                        },
+                      );
+                    },
+                  ),
+          ),
+        ],
+    ),
     );
   }
 }
@@ -189,14 +234,14 @@ class SectionTitle extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(bottom: 12.0, top: 12.0),
+      padding: const EdgeInsets.only(bottom: 16.0, top: 20.0),
       child: Text(
         title,
         textAlign: TextAlign.center,
         style: const TextStyle(
           fontWeight: FontWeight.w600,
           fontSize: 16,
-          color: Colors.black87,
+          color: Color(0xFF333333),
         ),
       ),
     );
@@ -227,113 +272,78 @@ class NotificationCard extends StatelessWidget {
         margin: const EdgeInsets.only(bottom: 12),
         padding: const EdgeInsets.all(16),
         decoration: BoxDecoration(
-          color: highlight ? const Color(0xFFE8F5E8) : Colors.white,
-          borderRadius: BorderRadius.circular(12),
+          color: highlight 
+            ? const Color(0xFF6A1B9A).withOpacity(0.08)
+            : Colors.white,
+          borderRadius: BorderRadius.circular(16),
           border: highlight
               ? Border.all(
-                  color: const Color(0xFF4CAF50).withOpacity(0.3), width: 1)
+                  color: const Color(0xFF6A1B9A).withOpacity(0.2), 
+                  width: 1
+                )
               : null,
           boxShadow: [
             BoxShadow(
-              color: Colors.black.withOpacity(0.04),
-              blurRadius: 4,
+              color: Colors.black.withOpacity(0.03),
+              blurRadius: 8,
               offset: const Offset(0, 2),
+              spreadRadius: 0,
             ),
           ],
         ),
-        child: Row(
+        child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Notification icon
-            Container(
-              width: 40,
-              height: 40,
-              decoration: BoxDecoration(
-                color: highlight
-                    ? const Color(0xFF4CAF50).withOpacity(0.1)
-                    : Colors.grey.withOpacity(0.1),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Icon(
-                _getNotificationIcon(title),
-                color: highlight ? const Color(0xFF4CAF50) : Colors.grey[600],
-                size: 20,
-              ),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Expanded(
+                  child: Text(
+                    title,
+                    style: TextStyle(
+                      fontWeight: FontWeight.w600,
+                      fontSize: 16,
+                      color: highlight 
+                        ? const Color(0xFF6A1B9A)
+                        : const Color(0xFF333333),
+                    ),
+                  ),
+                ),
+                if (highlight)
+                  Container(
+                    width: 8,
+                    height: 8,
+                    margin: const EdgeInsets.only(top: 4),
+                    decoration: const BoxDecoration(
+                      color: Color(0xFF6A1B9A),
+                      shape: BoxShape.circle,
+                    ),
+                  ),
+              ],
             ),
-            const SizedBox(width: 12),
-            // Notification content
-            Expanded(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      Expanded(
-                        child: Text(
-                          title,
-                          style: TextStyle(
-                            fontWeight: FontWeight.w600,
-                            fontSize: 15,
-                            color: Colors.black.withOpacity(0.9),
-                          ),
-                        ),
-                      ),
-                      if (highlight)
-                        Container(
-                          width: 8,
-                          height: 8,
-                          decoration: const BoxDecoration(
-                            color: Color(0xFF4CAF50),
-                            shape: BoxShape.circle,
-                          ),
-                        ),
-                    ],
-                  ),
-                  const SizedBox(height: 4),
-                  Text(
-                    subtitle,
-                    style: TextStyle(
-                      fontSize: 13,
-                      color: Colors.grey[700],
-                      height: 1.3,
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Text(
-                    time,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: Colors.grey[500],
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ],
+            const SizedBox(height: 8),
+            Text(
+              subtitle,
+              style: const TextStyle(
+                fontSize: 14,
+                color: Color(0xFF666666),
+                height: 1.4,
+              ),
+              maxLines: 3,
+              overflow: TextOverflow.ellipsis,
+            ),
+            const SizedBox(height: 8),
+            Text(
+              time,
+              style: const TextStyle(
+                fontSize: 12,
+                color: Color(0xFF999999),
+                fontWeight: FontWeight.w400,
               ),
             ),
           ],
         ),
       ),
     );
-  }
-
-  IconData _getNotificationIcon(String title) {
-    switch (title.toLowerCase()) {
-      case 'payment confirm':
-        return Icons.payment;
-      case 'bonus notice':
-        return Icons.card_giftcard;
-      case 'order delivered':
-        return Icons.local_shipping;
-      case 'special offer':
-        return Icons.local_offer;
-      case 'account update':
-        return Icons.account_circle;
-      case 'new feature':
-        return Icons.new_releases;
-      default:
-        return Icons.notifications;
-    }
   }
 }
