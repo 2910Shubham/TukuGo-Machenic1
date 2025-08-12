@@ -1,6 +1,6 @@
 name: tukugo
 description: "A new Flutter project."
-publish_to: 'none'
+publish_to: "none"
 
 version: 1.0.0+1
 
@@ -9,15 +9,15 @@ environment:
 
 dependencies:
   google_maps_flutter: ^2.5.0
-  geocoding: ^2.1.0  # For converting address text to coordinates
+  geocoding: ^2.1.0 # For converting address text to coordinates
   flutter:
     sdk: flutter
   intl_phone_field: ^3.2.0
-  go_router: ^5.2.0  
+  go_router: ^5.2.0
   cupertino_icons: ^1.0.8
   image_picker: ^1.1.2
   path_provider: ^2.1.5
-  smooth_page_indicator: ^1.1.0  
+  smooth_page_indicator: ^1.1.0
   flutter_svg: ^2.0.17
   intl: ^0.20.2
   dotted_border: ^2.0.0+3
@@ -38,6 +38,7 @@ flutter:
 
   assets:
     - assets/
+    - assets/mechanicCar.png
     - assets/ProfilePic.jpg
     - assets/QR.png
     - assets/payment.png
@@ -63,17 +64,14 @@ flutter:
     - assets/top_curve.svg
     - assets/google_icon.png
     - assets/facebook.png
-  
+
   fonts:
     - family: Roboto
       fonts:
         - asset: assets/fonts/Roboto-Regular.ttf
         - asset: assets/fonts/Roboto-Bold.ttf
           weight: 500
-       
 
-
-   
 flutter_launcher_icons:
   android: true
   ios: true

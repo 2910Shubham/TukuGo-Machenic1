@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tukugo/screen/drawer/method_selection.dart';
 
 class AddMoneyPage extends StatefulWidget {
   const AddMoneyPage({super.key});
@@ -113,9 +114,10 @@ class _AddMoneyPageState extends State<AddMoneyPage> {
                     alignment: Alignment.centerRight,
                     child: GestureDetector(
                       onTap: () {
-                        context.push(
-                          '/auth/drawer/paymentmethod',
-                        ); // Navigate or handle tap here
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                              builder: (context) => PaymentMethodScreen()),
+                        );
                       },
                       child: const Text(
                         'Add payment Method',
