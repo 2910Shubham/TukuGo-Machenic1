@@ -1,25 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:tukugo/screen/drawer/profile_drawer.dart';
-import 'package:tukugo/screen/history_screen.dart';
-import 'package:tukugo/screen/home_screen.dart';
-import 'package:tukugo/screen/notification_screen.dart';
-
-class BottomNavPainter extends CustomPainter {
-  final int selectedIndex;
-
-  BottomNavPainter({required this.selectedIndex});
-
-  @override
-  void paint(Canvas canvas, Size size) {
-    final paint = Paint()
-      ..color = const Color(0xFF1E1E1E)
-      ..style = PaintingStyle.fill;
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) => true;
-}
 
 class Layout extends StatefulWidget {
   final Widget child;
@@ -30,91 +10,89 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
-  int currentPage = 0;
-  List<Widget> pages = const [
-    HomeScreen(),
-    PaymentHistory(),
-    Notifications(),
-    ProfileScreen(),
-  ];
   int selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child, // ✅ Shows the current page inside Shell
+      body: widget.child,
       bottomNavigationBar: Container(
         height: 80,
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: const BorderRadius.only(
+            topLeft: Radius.circular(24),
+            topRight: Radius.circular(24),
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withOpacity(0.08),
+              blurRadius: 12,
+              offset: const Offset(0, -4),
+              spreadRadius: 0,
+            )
+          ],
+        ),
         child: Stack(
           children: [
-            // Background with arc cutout for selected item
-            Container(
-              height: 80,
-              decoration: const BoxDecoration(
-                color: Color.fromRGBO(18, 18, 18, 1),
+            // Purple bar at the bottom center
+            Align(
+              alignment: Alignment.bottomCenter,
+              child: Container(
+                width: 100,
+                height: 4,
+                margin: const EdgeInsets.only(bottom: 8),
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6A1B9A),
+                  borderRadius: BorderRadius.circular(2),
+                ),
               ),
-              child: selectedIndex >= 0
-                  ? CustomPaint(
-                      painter: BottomNavPainter(selectedIndex: selectedIndex),
-                      size: Size(MediaQuery.of(context).size.width, 80),
-                    )
-                  : null,
             ),
             // Navigation items
-            Positioned.fill(
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  // Home
-                  _buildNavItem(
-                    icon: Icons.home_rounded,
-                    index: 0,
-                    selectedIndex: selectedIndex,
-                    onTap: () {
-                      selectedIndex = 0;
-                      context.go('/home');
-                    },
-                  ),
-                  // Payment/Pie Chart
-
-                  // History
-                  _buildNavItem(
-                    icon: Icons.history,
-                    index: 2,
-                    selectedIndex: selectedIndex,
-                    onTap: () {
-                      selectedIndex = 2;
-                      context.go('/ride-history');
-                    },
-                  ),
-                  // Notifications
-                  _buildNavItem(
-                    icon: Icons.notifications_none_rounded,
-                    index: 3,
-                    selectedIndex: selectedIndex,
-                    onTap: () {
-                      selectedIndex = 3;
-                      context.go('/notifications');
-                    },
-                  ),
-                  // _buildNavItem(
-                  //   icon: Icons.pie_chart_outline_rounded,
-                  //   index: 1,
-                  //   selectedIndex: selectedIndex,
-                  //   onTap: () {
-                  //     selectedIndex = 1;
-                  //     context.go('/payment');
-                  //   },
-                  // ),
-                  _buildNavItem(
-                    icon: Icons.person,
-                    index: 1,
-                    selectedIndex: selectedIndex,
-                    onTap: () {
-                      selectedIndex = 1;
-                      context.go('/home/profile');
-                    },
-                  ),
-                ],
+            SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.only(top: 8, bottom: 20),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    _buildNavItem(
+                      icon: Icons.home_filled,
+                      index: 0,
+                      selectedIndex: selectedIndex,
+                      onTap: () {
+                        setState(() => selectedIndex = 0);
+                        context.go('/home');
+                      },
+                    ),
+                    _buildNavItem(
+                      icon: Icons.history_rounded,
+                      index: 1,
+                      selectedIndex: selectedIndex,
+                      onTap: () {
+                        setState(() => selectedIndex = 1);
+                        context.go('/ride-history');
+                      },
+                    ),
+                    _buildNavItem(
+                      icon: Icons.account_balance_wallet_rounded,
+                      index: 2,
+                      selectedIndex: selectedIndex,
+                      onTap: () {
+                        setState(() => selectedIndex = 2);
+                        context.go('/payment');
+                      },
+                    ),
+                    _buildNavItem(
+                      icon: Icons.settings_rounded,
+                      index: 3,
+                      selectedIndex: selectedIndex,
+                      onTap: () {
+                        setState(() => selectedIndex = 3);
+                        context.go('/settings');
+                      },
+                    ),
+                  ],
+                ),
               ),
             ),
           ],
@@ -133,47 +111,155 @@ class _LayoutState extends State<Layout> {
 
     return GestureDetector(
       onTap: onTap,
-      child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        width: 80,
-        height: 80,
-        transform: Matrix4.translationValues(0, isSelected ? -40 : 0, 0),
-        child: Stack(
-          alignment: Alignment.center,
-          children: [
-            // Bottom half ring
-            if (isSelected)
-              Positioned(
-                bottom: 0,
-                child: Container(
-                  width: 80,
-                  height: 40, // Half of total height
-                  decoration: const BoxDecoration(
-                    color: Color.fromARGB(103, 46, 46, 46),
-                    borderRadius: BorderRadius.vertical(
-                      bottom: Radius.circular(40),
-                    ),
-                  ),
+      behavior: HitTestBehavior.opaque,
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Dot indicator on top of selected icon
+          Container(
+            width: 6,
+            height: 6,
+            margin: const EdgeInsets.only(bottom: 4),
+            decoration: BoxDecoration(
+              color: isSelected 
+                ? const Color(0xFF6A1B9A) 
+                : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+          ),
+          // Icon with background shading when selected
+          Container(
+            padding: const EdgeInsets.all(8),
+            decoration: BoxDecoration(
+              color: isSelected 
+                ? const Color(0xFF6A1B9A).withOpacity(0.1)
+                : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              size: 24,
+              color: isSelected 
+                ? const Color(0xFF6A1B9A) 
+                : const Color(0xFF9E9E9E),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+// Alternative standalone version
+class ExactBottomNavBar extends StatefulWidget {
+  final int currentIndex;
+  final Function(int) onTap;
+  
+  const ExactBottomNavBar({
+    super.key,
+    required this.currentIndex,
+    required this.onTap,
+  });
+
+  @override
+  State<ExactBottomNavBar> createState() => _ExactBottomNavBarState();
+}
+
+class _ExactBottomNavBarState extends State<ExactBottomNavBar> {
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 80,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: const BorderRadius.only(
+          topLeft: Radius.circular(24),
+          topRight: Radius.circular(24),
+        ),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withOpacity(0.08),
+            blurRadius: 12,
+            offset: const Offset(0, -4),
+          )
+        ],
+      ),
+      child: Stack(
+        children: [
+          // Purple bar at bottom
+          Positioned(
+            bottom: 8,
+            left: 0,
+            right: 0,
+            child: Center(
+              child: Container(
+                width: 100,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: const Color(0xFF6A1B9A),
+                  borderRadius: BorderRadius.circular(2),
                 ),
               ),
-
-            // Main Icon Circle
-            Container(
-              width: 60,
-              height: 60,
-              decoration: BoxDecoration(
-                color:
-                    isSelected ? const Color(0xFF2196F3) : Colors.transparent,
-                shape: BoxShape.circle,
-              ),
-              child: Icon(
-                icon,
-                color: isSelected ? Colors.white : Colors.grey,
-                size: 28,
-              ),
             ),
-          ],
-        ),
+          ),
+          // Navigation items
+          Padding(
+            padding: const EdgeInsets.only(top: 12, bottom: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                _navItem(Icons.home_filled, 0),
+                _navItem(Icons.history, 1),
+                _navItem(Icons.account_balance_wallet_outlined, 2),
+                _navItem(Icons.settings_outlined, 3),
+              ],
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _navItem(IconData icon, int index) {
+    final isSelected = widget.currentIndex == index;
+    
+    return GestureDetector(
+      onTap: () => widget.onTap(index),
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          // Top dot indicator
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            width: 6,
+            height: 6,
+            margin: const EdgeInsets.only(bottom: 6),
+            decoration: BoxDecoration(
+              color: isSelected 
+                ? const Color(0xFF6A1B9A) 
+                : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+          ),
+          // Icon with background shading
+          AnimatedContainer(
+            duration: const Duration(milliseconds: 200),
+            padding: const EdgeInsets.all(10),
+            decoration: BoxDecoration(
+              color: isSelected 
+                ? const Color(0xFF6A1B9A).withOpacity(0.12)
+                : Colors.transparent,
+              shape: BoxShape.circle,
+            ),
+            child: Icon(
+              icon,
+              size: 22,
+              color: isSelected 
+                ? const Color(0xFF6A1B9A) 
+                : const Color(0xFF9E9E9E),
+            ),
+          ),
+        ],
       ),
     );
   }
