@@ -73,15 +73,10 @@ class _PaymentMethodScreenState extends State<PaymentMethodScreen> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         elevation: 0,
-        leading: InkWell(
-          onTap: () {
-            context.go('/wallet');
-          },
-          child: const Icon(Icons.arrow_back, color: Colors.black),
-        ),
         title: const Text(
           'Amount',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.w600),
+          style: TextStyle(
+              color: Color.fromARGB(192, 0, 0, 0), fontWeight: FontWeight.w500),
         ),
         centerTitle: true,
       ),
