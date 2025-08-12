@@ -1309,8 +1309,6 @@ class DetailedDescriptionWidget extends StatelessWidget {
             child: Center(
               child: Image.asset(
                 'assets/mechanicCar.png',
-                height: 100,
-                width: 100,
               ),
             ),
           ),
