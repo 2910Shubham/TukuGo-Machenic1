@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tukugo/screen/notification_screen.dart';
 
 class TransactionScreen extends StatefulWidget {
   const TransactionScreen({super.key});
@@ -16,14 +17,28 @@ class _TransactionScreenState extends State<TransactionScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        actionsPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 10),
         backgroundColor: Color.fromRGBO(93, 32, 172, 1),
         actions: [
-          IconButton(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            icon: const Icon(Icons.notifications_none, color: Colors.black),
-            onPressed: () {
-              context.push('/notifications');
-            },
+          Container(
+            width: 35,
+            height: 35,
+            decoration: BoxDecoration(
+              color: Colors.white.withOpacity(0.2),
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context, rootNavigator: true).push(
+                  MaterialPageRoute(builder: (context) => Notifications()),
+                );
+              },
+              child: Icon(
+                Icons.notifications_outlined,
+                color: Colors.white,
+                size: 25,
+              ),
+            ),
           ),
         ],
       ),
