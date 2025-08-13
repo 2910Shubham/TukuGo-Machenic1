@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tukugo/screen/drawer/profile_drawer.dart';
+import 'package:tukugo/screen/drawer/wallet.dart';
 import 'package:tukugo/screen/history_screen.dart';
 import 'package:tukugo/screen/home_screen.dart';
 import 'package:tukugo/screen/notification_screen.dart';
+import 'package:tukugo/screen/drawer/wallet.dart';
 
 class Layout extends StatefulWidget {
   final Widget child;
@@ -15,10 +17,10 @@ class Layout extends StatefulWidget {
 
 class _LayoutState extends State<Layout> {
   int currentPage = 0;
-  List<Widget> pages = const [
+  List<Widget> pages = [
     HomeScreen(),
     PaymentHistory(),
-    Notifications(),
+    MyWallet(),
     ProfileScreen(),
   ];
   int selectedIndex = 0;
@@ -26,7 +28,7 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child, // ✅ Shows the current page inside Shell
+      body: widget.child, 
       bottomNavigationBar: Container(
         height: 80,
         decoration: BoxDecoration(
@@ -68,7 +70,7 @@ class _LayoutState extends State<Layout> {
                   children: [
                     // Home
                     _buildNavItem(
-                      icon: Icons.home_rounded,
+                     icon: Icons.home_rounded,
                       index: 0,
                       selectedIndex: selectedIndex,
                       onTap: () {
@@ -78,32 +80,32 @@ class _LayoutState extends State<Layout> {
                     ),
                     // Profile
                     _buildNavItem(
-                      icon: Icons.person,
+                      icon: Icons.history,
                       index: 1,
                       selectedIndex: selectedIndex,
                       onTap: () {
                         setState(() => selectedIndex = 1);
-                        context.go('/home/profile');
+                        context.go('/ride-history');
                       },
                     ),
                     // History
                     _buildNavItem(
-                      icon: Icons.history,
+                      icon: Icons.wallet,
                       index: 2,
                       selectedIndex: selectedIndex,
                       onTap: () {
                         setState(() => selectedIndex = 2);
-                        context.go('/ride-history');
+                        context.go('/nav/wallet');
                       },
                     ),
                     // Notifications
                     _buildNavItem(
-                      icon: Icons.notifications_none_rounded,
+                      icon: Icons.settings,
                       index: 3,
                       selectedIndex: selectedIndex,
                       onTap: () {
                         setState(() => selectedIndex = 3);
-                        context.go('/notifications');
+                        context.go('/home/profile');
                       },
                     ),
                   ],
