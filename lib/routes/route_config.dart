@@ -201,9 +201,9 @@ class MyAppRouter {
             builder: (context, state) => const PaymentHistory(),
           ),
           GoRoute(
-            path: '/notifications',
-            name: MyAppRouteConstants.notifications,
-            builder: (context, state) => const Notifications(),
+            path: '/nav/wallet',
+            name: MyAppRouteConstants.navWallet,
+            builder: (context, state) => MyWallet(),
           ),
         ],
       ),

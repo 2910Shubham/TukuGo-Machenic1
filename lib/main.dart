@@ -26,7 +26,7 @@ class MyApp extends StatelessWidget {
         ),
       ),
 
-      debugShowCheckedModeBanner: false, // Hide debug banner
+      debugShowCheckedModeBanner: false, 
       title: 'Tukugo',
       routerConfig: routerContext.router,
     );
