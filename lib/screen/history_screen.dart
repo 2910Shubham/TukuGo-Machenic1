@@ -197,16 +197,26 @@ class _PaymentHistoryState extends State<PaymentHistory>
     return Scaffold(
       backgroundColor: const Color(0xFFF5F5F5),
       appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        centerTitle: true,
-        title: Text(
-          'History',
-          style: Theme.of(context).textTheme.titleLarge,
-        ),
+        backgroundColor: Color.fromRGBO(93, 32, 172, 1),
       ),
       body: Column(
         children: [
+          Container(
+            alignment: Alignment.center,
+            width: double.infinity,
+            height: 60,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    bottomLeft: Radius.circular(30),
+                    bottomRight: Radius.circular(30)),
+                color: Color.fromRGBO(93, 32, 172, 1)),
+            child: Text('History',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w500,
+                  color: Color.fromRGBO(255, 255, 255, 0.7),
+                )),
+          ),
           Container(
             color: Colors.white,
             padding: const EdgeInsets.all(16),
@@ -219,12 +229,12 @@ class _PaymentHistoryState extends State<PaymentHistory>
               child: TabBar(
                 controller: _tabController,
                 indicator: BoxDecoration(
-                  color: const Color(0xFF2196F3),
+                  color: Color.fromRGBO(93, 32, 172, 1),
                   borderRadius: BorderRadius.circular(6),
                 ),
                 indicatorSize: TabBarIndicatorSize.tab,
                 dividerColor: Colors.transparent,
-                labelColor: Colors.white,
+                labelColor: Color.fromRGBO(255, 255, 255, 0.7),
                 unselectedLabelColor: Colors.grey[700],
                 labelStyle: const TextStyle(
                   fontSize: 14,
