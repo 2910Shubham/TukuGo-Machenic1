@@ -28,9 +28,9 @@ class _LayoutState extends State<Layout> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: widget.child, 
+      body: widget.child,
       bottomNavigationBar: Container(
-        height: 80,
+        height: 88,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: const BorderRadius.only(
@@ -70,7 +70,7 @@ class _LayoutState extends State<Layout> {
                   children: [
                     // Home
                     _buildNavItem(
-                     icon: Icons.home_rounded,
+                      icon: Icons.home_rounded,
                       index: 0,
                       selectedIndex: selectedIndex,
                       onTap: () {
@@ -139,9 +139,7 @@ class _LayoutState extends State<Layout> {
             height: 6,
             margin: const EdgeInsets.only(bottom: 4),
             decoration: BoxDecoration(
-              color: isSelected 
-                ? const Color(0xFF6A1B9A) 
-                : Colors.transparent,
+              color: isSelected ? const Color(0xFF6A1B9A) : Colors.transparent,
               shape: BoxShape.circle,
             ),
           ),
@@ -150,17 +148,17 @@ class _LayoutState extends State<Layout> {
             duration: const Duration(milliseconds: 200),
             padding: const EdgeInsets.all(8),
             decoration: BoxDecoration(
-              color: isSelected 
-                ? const Color(0xFF6A1B9A).withOpacity(0.1)
-                : Colors.transparent,
+              color: isSelected
+                  ? const Color(0xFF6A1B9A).withOpacity(0.1)
+                  : Colors.transparent,
               shape: BoxShape.circle,
             ),
             child: Icon(
               icon,
-              size: 24,
-              color: isSelected 
-                ? const Color(0xFF6A1B9A) 
-                : const Color(0xFF9E9E9E),
+              size: 30,
+              color: isSelected
+                  ? const Color(0xFF6A1B9A)
+                  : const Color(0xFF9E9E9E),
             ),
           ),
         ],

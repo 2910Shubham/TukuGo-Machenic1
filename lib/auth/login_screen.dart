@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
   Future<void> _handleLogin() async {
     if (_formKey.currentState!.validate()) {
       // Show loading splash screen
-       context.pushNamed(MyAppRouteConstants.loginSplashScreen);
+      context.pushNamed(MyAppRouteConstants.loginSplashScreen);
 
       // Simulate login delay
       await Future.delayed(const Duration(seconds: 2));
@@ -65,7 +65,8 @@ class _LoginScreenState extends State<LoginScreen> {
               child: SingleChildScrollView(
                 physics: const ClampingScrollPhysics(),
                 child: Padding(
-                  padding: EdgeInsets.fromLTRB(24, MediaQuery.of(context).size.height * 0.02, 24, 24),
+                  padding: EdgeInsets.fromLTRB(
+                      24, MediaQuery.of(context).size.height * 0.02, 24, 24),
                   child: Form(
                     key: _formKey,
                     child: Column(
@@ -91,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           textAlign: TextAlign.center,
                         ),
                         const SizedBox(height: 20),
-                        
+
                         // Login ID field
                         _buildInputField(
                           controller: _usernameController,
@@ -105,7 +106,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           },
                         ),
                         const SizedBox(height: 15),
-                      
+
                         // Password field
                         _buildInputField(
                           controller: _passwordController,
@@ -114,11 +115,14 @@ class _LoginScreenState extends State<LoginScreen> {
                           obscureText: !_passwordVisible,
                           suffixIcon: IconButton(
                             icon: Icon(
-                              _passwordVisible ? Icons.visibility : Icons.visibility_off,
+                              _passwordVisible
+                                  ? Icons.visibility
+                                  : Icons.visibility_off,
                               color: Colors.black38,
                               size: 20,
                             ),
-                            onPressed: () => setState(() => _passwordVisible = !_passwordVisible),
+                            onPressed: () => setState(
+                                () => _passwordVisible = !_passwordVisible),
                           ),
                           validator: (value) {
                             if (value == null || value.isEmpty) {
@@ -127,7 +131,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             return null;
                           },
                         ),
-                        
+
                         // Remember me and Forgot Password
                         Row(
                           children: [
@@ -142,8 +146,10 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                             const Text("Remember me"),
                             const Spacer(),
-                            GestureDetector(                              onTap: () {
-                                context.pushNamed(MyAppRouteConstants.setPasswordRouteName);
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(
+                                    MyAppRouteConstants.setPasswordRouteName);
                               },
                               child: const Text(
                                 "Forgot Password?",
@@ -155,27 +161,33 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        
+
                         const SizedBox(height: 15),
-                        
+
                         // Login button
                         SizedBox(
                           width: double.infinity,
                           child: Container(
                             height: 50,
-                            decoration: AppStyles.gradientButtonDecoration.copyWith(
+                            decoration:
+                                AppStyles.gradientButtonDecoration.copyWith(
                               borderRadius: BorderRadius.circular(25),
-                            ),                            child: ElevatedButton(                              onPressed: () async {
+                            ),
+                            child: ElevatedButton(
+                              onPressed: () async {
                                 if (_formKey.currentState!.validate()) {
                                   // Show loading splash screen
-                                   context.pushNamed(MyAppRouteConstants.loginSplashScreen);
-                                  
+                                  context.pushNamed(
+                                      MyAppRouteConstants.loginSplashScreen);
+
                                   // Simulate login delay
-                                  await Future.delayed(const Duration(seconds: 2));
-                                  
+                                  await Future.delayed(
+                                      const Duration(seconds: 2));
+
                                   // Navigate to home screen and remove all previous routes
                                   if (mounted) {
-                                    context.goNamed(MyAppRouteConstants.homeRouteName);
+                                    context.goNamed(
+                                        MyAppRouteConstants.homeRouteName);
                                   }
                                 }
                               },
@@ -185,7 +197,8 @@ class _LoginScreenState extends State<LoginScreen> {
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(25),
                                 ),
-                                padding: const EdgeInsets.symmetric(horizontal: 20),
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 20),
                               ),
                               child: const Text(
                                 "Login",
@@ -198,16 +211,18 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ),
                         ),
-                        
+
                         const SizedBox(height: 15),
-                        
+
                         // Register now link
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text("new user? ", style: AppStyles.subHeading),
-                            GestureDetector(                              onTap: () {
-                                context.pushNamed(MyAppRouteConstants.registerRouteName);
+                            GestureDetector(
+                              onTap: () {
+                                context.pushNamed(
+                                    MyAppRouteConstants.registerRouteName);
                               },
                               child: const Text(
                                 "register now",
@@ -219,7 +234,7 @@ class _LoginScreenState extends State<LoginScreen> {
                             ),
                           ],
                         ),
-                        
+
                         const SizedBox(height: 10),
                         // Social login section
                         const Row(
@@ -227,14 +242,15 @@ class _LoginScreenState extends State<LoginScreen> {
                             Expanded(child: Divider()),
                             Padding(
                               padding: EdgeInsets.symmetric(horizontal: 8),
-                              child: Text("or login with", style: TextStyle(fontSize: 12)),
+                              child: Text("or login with",
+                                  style: TextStyle(fontSize: 12)),
                             ),
                             Expanded(child: Divider()),
                           ],
                         ),
-                        
+
                         const SizedBox(height: 8),
-                        
+
                         // Social login buttons
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
@@ -313,7 +329,9 @@ class _LoginScreenState extends State<LoginScreen> {
               hintStyle: const TextStyle(color: Colors.black38, fontSize: 16),
               border: InputBorder.none,
               enabledBorder: InputBorder.none,
-              focusedBorder: InputBorder.none,              contentPadding: const EdgeInsets.symmetric(horizontal: 5, vertical: 14),
+              focusedBorder: InputBorder.none,
+              contentPadding:
+                  const EdgeInsets.symmetric(horizontal: 5, vertical: 14),
               suffixIcon: suffixIcon,
             ),
             validator: validator,
