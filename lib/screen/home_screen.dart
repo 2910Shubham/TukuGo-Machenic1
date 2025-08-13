@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
 import 'package:go_router/go_router.dart';
+import 'package:tukugo/screen/notification_screen.dart';
 import 'package:tukugo/screen/otp-startRide.dart';
 import 'package:tukugo/screen/payment/paymentPage.dart';
 
@@ -78,10 +80,18 @@ class _HomeScreenState extends State<HomeScreen> {
                         color: Colors.white.withOpacity(0.2),
                         borderRadius: BorderRadius.circular(8),
                       ),
-                      child: Icon(
-                        Icons.notifications_outlined,
-                        color: Colors.white,
-                        size: 25,
+                      child: InkWell(
+                        onTap: () {
+                          Navigator.of(context, rootNavigator: true).push(
+                            MaterialPageRoute(
+                                builder: (context) => Notifications()),
+                          );
+                        },
+                        child: Icon(
+                          Icons.notifications_outlined,
+                          color: Colors.white,
+                          size: 25,
+                        ),
                       ),
                     ),
                   ],
@@ -1481,6 +1491,9 @@ class _FairPriceEntryWidgetState extends State<FairPriceEntryWidget> {
                   child: TextField(
                     controller: priceController,
                     keyboardType: TextInputType.number,
+                    inputFormatters: [
+                      FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
+                    ],
                     textAlign: TextAlign.center,
                     style: TextStyle(
                       fontSize: 24,
