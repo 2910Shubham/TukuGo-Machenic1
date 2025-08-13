@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:latlong2/latlong.dart';
-import 'package:go_router/go_router.dart';
 import 'package:tukugo/screen/notification_screen.dart';
-import 'package:tukugo/screen/otp-startRide.dart';
 import 'package:tukugo/screen/payment/paymentPage.dart';
 
 class HomeScreen extends StatefulWidget {
