@@ -90,7 +90,7 @@ class _LayoutState extends State<Layout> {
                     ),
                     // History
                     _buildNavItem(
-                      icon: Icons.wallet,
+                      icon: Icons.account_balance_wallet_rounded,
                       index: 2,
                       selectedIndex: selectedIndex,
                       onTap: () {
