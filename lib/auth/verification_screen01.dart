@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:tukugo/auth/aadhar.dart';
 import 'package:tukugo/auth/driving_license.dart';
+import 'package:tukugo/auth/select_mechanic_vehicle.dart';
 import 'package:tukugo/auth/vehicle_rc.dart';
 import 'package:tukugo/routes/route_constants.dart';
 
@@ -160,6 +161,19 @@ class VerificationScreen01 extends StatelessWidget {
                         Navigator.of(context, rootNavigator: true).push(
                           MaterialPageRoute(
                               builder: (context) => AadhaarUploadPage()),
+                        );
+                      },
+                    ),
+                    SizedBox(height: 12),
+                    VerificationCard(
+                      title: 'Vehical Specialization',
+                      subtitle: 'Under verification',
+                      icon: Icons.warning_rounded,
+                      iconColor: Colors.orange,
+                      onTap: () {
+                        Navigator.of(context, rootNavigator: true).push(
+                          MaterialPageRoute(
+                              builder: (context) => SpecializationScreen()),
                         );
                       },
                     ),

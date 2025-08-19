@@ -36,4 +36,5 @@ class MyAppRouteConstants {
   static const String profileScreen = 'profileScreen';
   static const String paymentScreen = 'paymentScreen';
   static const String navWallet = 'navWallet';
+  static const String SpecializationScreen = 'SpecializationScreen';
 }
