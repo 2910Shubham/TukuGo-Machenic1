@@ -76,6 +76,6 @@ flutter:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: "assets/images/TukugoLogo.jpg"
+  image_path: "assets/logo/TukuGo_DriverIcon.jpg"
   adaptive_icon_background: "#FFFFFF"
   min_sdk_android: 21

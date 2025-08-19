@@ -3,6 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:tukugo/auth/aadhar.dart';
 import 'package:tukugo/auth/driving_license.dart';
 import 'package:tukugo/auth/location.dart';
+import 'package:tukugo/auth/select_mechanic_vehicle.dart';
 import 'package:tukugo/auth/vehicle_rc.dart';
 import 'package:tukugo/auth/vehicle_selection_page.dart';
 import 'package:tukugo/auth/verification_screen01.dart';
@@ -168,6 +169,11 @@ class MyAppRouter {
         name: MyAppRouteConstants.paymentScreen,
         path: '/payment',
         builder: (context, state) => PaymentScreen(),
+      ),
+      GoRoute(
+        name: MyAppRouteConstants.SpecializationScreen,
+        path: '/specialization',
+        builder: (context, state) => SpecializationScreen(),
       ),
       ShellRoute(
         navigatorKey: _shellNavigatorKey,
