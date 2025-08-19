@@ -16,13 +16,8 @@ class _HomeScreenState extends State<HomeScreen> {
   bool isOnDuty = false;
   bool showJob = false;
   bool showDetailedDescription = false;
-  bool showFairPriceEntry = false;
-  bool showWaitingForCustomer = false;
-  bool showCustomerRefusal = false;
   bool showReachPickupCard = false;
   bool showGuidedMapsCard = false;
-  bool showGoToDropCard = false;
-  bool showCompleteRideCard = false;
   bool showOnTheWayRideCard = false;
 
   @override
@@ -269,12 +264,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
 
               // Job Alert Dialog (shows first when going on duty)
-              if (showJob &&
-                  !showDetailedDescription &&
-                  !showFairPriceEntry &&
-                  !showWaitingForCustomer &&
-                  !showCustomerRefusal &&
-                  !showReachPickupCard)
+              if (showJob && !showDetailedDescription && !showReachPickupCard)
                 Container(
                   color: Colors.black.withOpacity(0.5),
                   child: Center(
@@ -298,173 +288,23 @@ class _HomeScreenState extends State<HomeScreen> {
                       onCancel: () {
                         setState(() {
                           showDetailedDescription = false;
+                          _resetAllStates();
+                          isOnDuty = false;
                         });
                       },
-                      onAskForFair: () {
+                      onAccept: () {
                         setState(() {
                           showDetailedDescription = false;
-                          showFairPriceEntry = true;
+                          showOnTheWayRideCard = true;
                         });
                       },
                     ),
                   ),
                 ),
 
-              // Fair Price Entry Dialog
-              if (showFairPriceEntry)
-                Container(
-                  color: Colors.black.withOpacity(0.5),
-                  child: Center(
-                    child: FairPriceEntryWidget(
-                      onClose: () {
-                        setState(() {
-                          showFairPriceEntry = false;
-                        });
-                      },
-                      onPriceSubmitted: (String price) {
-                        setState(() {
-                          showFairPriceEntry = false;
-                          showWaitingForCustomer = true;
-                        });
-                        _showWaitingBottomSheet();
-                      },
-                    ),
-                  ),
-                ),
-
-              // Customer Refusal Dialog
-              if (showCustomerRefusal)
-                Container(
-                  color: Colors.black.withOpacity(0.5),
-                  child: Center(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Container(
-                          margin: const EdgeInsets.all(16),
-                          padding: const EdgeInsets.all(20),
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(12),
-                            boxShadow: [
-                              BoxShadow(
-                                color: Colors.black.withOpacity(0.1),
-                                blurRadius: 10,
-                                offset: const Offset(0, 4),
-                              ),
-                            ],
-                          ),
-                          child: Column(
-                            children: [
-                              const Text(
-                                'Customer refused on your fair',
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  color: Colors.black87,
-                                  fontWeight: FontWeight.w500,
-                                ),
-                                textAlign: TextAlign.center,
-                              ),
-                              const SizedBox(height: 16),
-                              const Text(
-                                'Customer choice',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              const SizedBox(height: 8),
-                              const Text(
-                                'Amount',
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  color: Colors.black54,
-                                ),
-                              ),
-                              const SizedBox(height: 4),
-                              const Text(
-                                '\$150',
-                                style: TextStyle(
-                                  fontSize: 32,
-                                  color: Color(0xFF8E44AD),
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 20),
-                              Row(
-                                children: [
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          showCustomerRefusal = false;
-                                          showJob = true;
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFF8E44AD),
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12),
-                                      ),
-                                      child: const Text(
-                                        'Cancel',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                  const SizedBox(width: 12),
-                                  Expanded(
-                                    child: ElevatedButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          showCustomerRefusal = false;
-                                          showOnTheWayRideCard = true;
-                                        });
-                                      },
-                                      style: ElevatedButton.styleFrom(
-                                        backgroundColor:
-                                            const Color(0xFF8E44AD),
-                                        foregroundColor: Colors.white,
-                                        shape: RoundedRectangleBorder(
-                                          borderRadius:
-                                              BorderRadius.circular(8),
-                                        ),
-                                        padding: const EdgeInsets.symmetric(
-                                            vertical: 12),
-                                      ),
-                                      child: const Text(
-                                        'Accept',
-                                        style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.w500,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ],
-                              ),
-                            ],
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-
-              // Reach Pickup Card
+              // Ride Cards
               if (showOnTheWayRideCard) _buildOnTheWayPickupCard(),
               if (showReachPickupCard) _buildReachPickupCard(),
-
-              // Guided Maps Card
               if (showGuidedMapsCard) _buildGuidedMapsCard(),
             ]),
           )
@@ -474,265 +314,11 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _resetAllStates() {
+    showJob = false;
     showDetailedDescription = false;
-    showFairPriceEntry = false;
-    showWaitingForCustomer = false;
-    showCustomerRefusal = false;
     showReachPickupCard = false;
     showGuidedMapsCard = false;
-    showGoToDropCard = false;
-    showCompleteRideCard = false;
     showOnTheWayRideCard = false;
-  }
-
-  void _showWaitingBottomSheet() {
-    showModalBottomSheet(
-      isDismissible: true,
-      context: Navigator.of(context, rootNavigator: true).context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Container(
-          decoration: BoxDecoration(
-            gradient: const LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF9B59B6), // Purple
-                Color(0xFFE8D5F2), // Light purple/white
-              ],
-            ),
-            borderRadius: BorderRadius.circular(16),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Row(
-                  children: [
-                    const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        setState(() {
-                          showWaitingForCustomer = false;
-                          isOnDuty = false;
-                        });
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(4),
-                        child: const Icon(
-                          Icons.close,
-                          color: Colors.white,
-                          size: 20,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 16),
-                Container(
-                  width: 40,
-                  height: 40,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
-                    shape: BoxShape.circle,
-                  ),
-                  child: const Icon(
-                    Icons.access_time,
-                    color: Colors.white,
-                    size: 24,
-                  ),
-                ),
-                const SizedBox(height: 16),
-                const Text(
-                  'Waiting for customer\nacceptance',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w500,
-                    color: Colors.white,
-                    height: 1.3,
-                  ),
-                  textAlign: TextAlign.center,
-                ),
-                const SizedBox(height: 24),
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      color: Colors.red,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Current location',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            '2972 Westheimer Rd. Santa Ana, Illinois 85486',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white70,
-                              height: 1.3,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        setState(() {
-                          showWaitingForCustomer = false;
-                          showCustomerRefusal = true;
-                          _showFoundBottomSheet();
-                        });
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                    ),
-                  ],
-                ),
-                const SizedBox(height: 32),
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.black,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
-        );
-      },
-    );
-  }
-
-  void _showFoundBottomSheet() {
-    showModalBottomSheet(
-      isDismissible: false,
-      context: Navigator.of(context, rootNavigator: true).context,
-      backgroundColor: Colors.transparent,
-      isScrollControlled: true,
-      builder: (BuildContext context) {
-        return Container(
-          width: double.infinity,
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-              colors: [
-                Color(0xFF8E44AD), // Purple
-                Color(0xFFBB9BC5), // Lighter purple
-              ],
-            ),
-            borderRadius: BorderRadius.vertical(
-              top: Radius.circular(20),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.all(20),
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                // Top indicator bar
-                Container(
-                  width: 40,
-                  height: 4,
-                  margin: const EdgeInsets.only(bottom: 20),
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-
-                // Location info
-                Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const Icon(
-                      Icons.location_on,
-                      color: Colors.red,
-                      size: 16,
-                    ),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                            'Current location',
-                            style: TextStyle(
-                              fontSize: 14,
-                              color: Colors.white,
-                              fontWeight: FontWeight.w500,
-                            ),
-                          ),
-                          const SizedBox(height: 4),
-                          const Text(
-                            '2972 Westheimer Rd. Santa Ana, Illinois 85486',
-                            style: TextStyle(
-                              fontSize: 12,
-                              color: Colors.white70,
-                              height: 1.3,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        Navigator.pop(context);
-                        setState(() {
-                          showWaitingForCustomer = false;
-                          showCustomerRefusal = true;
-                        });
-                      },
-                      child: const Icon(
-                        Icons.arrow_forward,
-                        color: Colors.white,
-                        size: 25,
-                      ),
-                    ),
-                  ],
-                ),
-
-                const SizedBox(height: 32),
-
-                // Bottom indicator line
-                Container(
-                  width: 40,
-                  height: 4,
-                  decoration: BoxDecoration(
-                    color: Colors.black54,
-                    borderRadius: BorderRadius.circular(2),
-                  ),
-                ),
-
-                const SizedBox(height: 16),
-              ],
-            ),
-          ),
-        );
-      },
-    );
   }
 
   Widget _buildOnTheWayPickupCard() {
@@ -954,12 +540,13 @@ class _HomeScreenState extends State<HomeScreen> {
                             setState(() {
                               showReachPickupCard = false;
                               showGuidedMapsCard = false;
-                              Navigator.of(context, rootNavigator: true).push(
-                                MaterialPageRoute(
-                                    builder: (context) => PaymentScreen()),
-                              );
-                              showJob = true;
+                              _resetAllStates();
+                              isOnDuty = false;
                             });
+                            Navigator.of(context, rootNavigator: true).push(
+                              MaterialPageRoute(
+                                  builder: (context) => PaymentScreen()),
+                            );
                           },
                           icon: const Icon(Icons.arrow_forward,
                               color: Colors.white),
@@ -1060,7 +647,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         setState(() {
                           showGuidedMapsCard = false;
-                          showGoToDropCard = true;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -1080,7 +666,6 @@ class _HomeScreenState extends State<HomeScreen> {
                       onPressed: () {
                         setState(() {
                           showGuidedMapsCard = false;
-                          showGoToDropCard = true;
                         });
                       },
                       style: ElevatedButton.styleFrom(
@@ -1246,12 +831,12 @@ class JobAlertWidget extends StatelessWidget {
 // Detailed Description Widget
 class DetailedDescriptionWidget extends StatelessWidget {
   final VoidCallback? onCancel;
-  final VoidCallback? onAskForFair;
+  final VoidCallback? onAccept;
 
   const DetailedDescriptionWidget({
     Key? key,
     this.onCancel,
-    this.onAskForFair,
+    this.onAccept,
   }) : super(key: key);
 
   @override
@@ -1340,7 +925,7 @@ class DetailedDescriptionWidget extends StatelessWidget {
               SizedBox(width: 12),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: onAskForFair,
+                  onPressed: onAccept,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF6B46C1),
                     foregroundColor: Colors.white,
@@ -1349,7 +934,7 @@ class DetailedDescriptionWidget extends StatelessWidget {
                       borderRadius: BorderRadius.circular(6),
                     ),
                   ),
-                  child: Text('Ask for fair'),
+                  child: Text('Accept'),
                 ),
               ),
             ],
@@ -1401,151 +986,6 @@ class DetailedDescriptionWidget extends StatelessWidget {
           ),
         ),
       ],
-    );
-  }
-}
-
-// Fair Price Entry Widget
-class FairPriceEntryWidget extends StatefulWidget {
-  final Function(String)? onPriceSubmitted;
-  final VoidCallback? onClose;
-
-  const FairPriceEntryWidget({
-    Key? key,
-    this.onPriceSubmitted,
-    this.onClose,
-  }) : super(key: key);
-
-  @override
-  State<FairPriceEntryWidget> createState() => _FairPriceEntryWidgetState();
-}
-
-class _FairPriceEntryWidgetState extends State<FairPriceEntryWidget> {
-  final TextEditingController priceController = TextEditingController();
-
-  @override
-  void dispose() {
-    priceController.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 300,
-      padding: const EdgeInsets.all(20),
-      decoration: BoxDecoration(
-        color: Color(0xFFE8E3F3),
-        borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withOpacity(0.15),
-            blurRadius: 16,
-            offset: const Offset(0, 4),
-          ),
-        ],
-      ),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Text(
-            'Enter your choice fair',
-            style: TextStyle(
-              fontSize: 18,
-              fontWeight: FontWeight.w600,
-              color: Colors.black87,
-            ),
-          ),
-          SizedBox(height: 24),
-          Text(
-            'Enter amount to ask customer',
-            style: TextStyle(
-              fontSize: 14,
-              color: Colors.black54,
-            ),
-          ),
-          SizedBox(height: 16),
-          Container(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-            decoration: BoxDecoration(
-              color: Colors.white,
-              borderRadius: BorderRadius.circular(8),
-              border: Border.all(color: Colors.grey.shade300),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  '₹',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontWeight: FontWeight.w600,
-                    color: Colors.black87,
-                  ),
-                ),
-                SizedBox(width: 4),
-                Flexible(
-                  child: TextField(
-                    controller: priceController,
-                    keyboardType: TextInputType.number,
-                    inputFormatters: [
-                      FilteringTextInputFormatter.allow(RegExp(r'[0-9.]')),
-                    ],
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.black87,
-                    ),
-                    decoration: InputDecoration(
-                      border: InputBorder.none,
-                      hintText: '250',
-                      hintStyle: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.grey.shade400,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          SizedBox(height: 24),
-          SizedBox(
-            width: double.infinity,
-            child: ElevatedButton(
-              onPressed: () {
-                String price = priceController.text.trim();
-                if (price.isNotEmpty) {
-                  if (widget.onPriceSubmitted != null) {
-                    widget.onPriceSubmitted!(price);
-                  }
-                  if (widget.onClose != null) {
-                    widget.onClose!();
-                  }
-                }
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Color(0xFF6B46C1),
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 14),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(6),
-                ),
-              ),
-              child: Text(
-                'Ask',
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-            ),
-          ),
-        ],
-      ),
     );
   }
 }
